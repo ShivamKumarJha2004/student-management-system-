@@ -34,10 +34,33 @@ export const getAllStudents = async (page, limit) => {
     orderBy: { createdAt: 'desc' }
   });
 };
+export const getStudentByRegNo = async (registrationNo) => {
+    return await prisma.student.findUnique({
+      where: { registrationNo }
+    });
+  };
+  
+  export const updateStudent = async (registrationNo, updateData) => {
+    try {
+      return await prisma.student.update({
+        where: { registrationNo },
+        data: updateData
+      });
+    } catch (err) {
+      if (err.code === 'P2025') {
+        return null; // Student not found
+      }
+      throw err;
+    }
+  };
+  
 
 
 export default {
   createStudent,
   getAllStudents,
+  getStudentByRegNo,
+  updateStudent,
+
   
 };

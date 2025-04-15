@@ -53,6 +53,22 @@ export const getStudentByRegNo = async (registrationNo) => {
       throw err;
     }
   };
+  export const deleteStudent = async (registrationNo) => {
+    try {
+      // Soft delete (update status to false)
+      return await prisma.student.update({
+        where: { registrationNo },
+        data: { status: false }
+      });
+    } catch (err) {
+      if (err.code === 'P2025') {
+        return null; // Student not found
+      }
+      throw err;
+    }
+  };
+  
+  
   
 
 
@@ -61,6 +77,7 @@ export default {
   getAllStudents,
   getStudentByRegNo,
   updateStudent,
+  deleteStudent
 
   
 };

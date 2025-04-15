@@ -100,3 +100,5 @@
 {"level":"info","message":"Connected to MongoDB via Prisma","timestamp":"2025-04-15 08:36:56"}
 {"level":"info","message":"Server running on port 3000","timestamp":"2025-04-15 08:44:31"}
 {"level":"info","message":"Connected to MongoDB via Prisma","timestamp":"2025-04-15 08:44:31"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-04-15 08:47:42"}
+{"level":"info","message":"Connected to MongoDB via Prisma","timestamp":"2025-04-15 08:47:42"}

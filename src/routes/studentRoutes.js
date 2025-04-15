@@ -3,7 +3,8 @@ import {
   createStudent,
   getAllStudents,
     getStudentByRegNo,
-    updateStudent
+    updateStudent,
+    deleteStudent
  
 } from '../controllers/studentController.js';
 import {
@@ -19,6 +20,7 @@ router.post('/',    createStudentValidation, createStudent);
 router.get('/', paginationValidation, getAllStudents);
 router.get('/:regNo', getStudentByRegNo);
 router.put('/:regNo', updateStudentValidation, updateStudent);
+router.delete('/:regNo', deleteStudent);
 
 
 export default router;

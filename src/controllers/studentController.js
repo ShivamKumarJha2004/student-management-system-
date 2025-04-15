@@ -52,6 +52,18 @@ export const getStudentByRegNo = async (req, res, next) => {
       next(err);
     }
   };
+  export const deleteStudent = async (req, res, next) => {
+    try {
+      const student = await studentService.deleteStudent(req.params.regNo);
+      if (!student) {
+        return res.status(404).json({ message: 'Student not found' });
+      }
+      res.status(200).json({ message: 'Student deleted successfully' });
+    } catch (err) {
+      next(err);
+    }
+  };
+  
   
   
 
@@ -61,5 +73,7 @@ export default {
   getAllStudents,
   getStudentByRegNo,
   updateStudent,
+  deleteStudent
+
   
 };

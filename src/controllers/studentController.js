@@ -2,19 +2,27 @@ import studentService from '../services/studentService.js';
 import { validationResult } from 'express-validator';
 
 export const createStudent = async (req, res, next) => {
-  try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+  
+      const student = await studentService.createStudent(req.body);
+      res.status(201).json(student);
+    } catch (err) {
+      
+      if (err.message.includes('Registration number must be unique')) {
+        return res.status(400).json({ message: err.message });
+      }
+      if (err.message.includes('Roll number must be unique within the class')) {
+        return res.status(400).json({ message: err.message });
+      }
+      // Pass the error to the global error handler if it's something else
+      next(err);
     }
-
-    const student = await studentService.createStudent(req.body);
-    res.status(201).json(student);
-  } catch (err) {
-    next(err);
-  }
-};
-
+  };
+    
 export const getAllStudents = async (req, res, next) => {
   try {
     const { page = 1, limit = 10 } = req.query;
